@@ -78,7 +78,9 @@ To replicate this analysis or run the web application:
 ├── utils/
 │   ├── preprocessing.py   # Preprocessing functions
 │   └── visualization.py   # Plotting helpers
-├── app.py                     # Streamlit Web Application
-├── .gitignore                 # Ignored files (models, envs)
-├── README.md                  # Project Documentation
-└── requirements.txt           # Dependencies
+├── .gitattributes                    
+├── .gitignore
+├── app.py                          # Streamlit Web Application
+├── requirements.txt                # Python Dependencies
+└── README.md                       # Project Documentation
+
