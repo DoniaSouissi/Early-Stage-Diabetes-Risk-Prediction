@@ -71,7 +71,7 @@ def create_preprocessor():
     
     # All categorical columns from the UCI Dataset
     categorical_features = [
-        'Gender', 'Polyuria', 'Polydipsia', 'sudden weight loss',
+        'Polyuria', 'Polydipsia', 'sudden weight loss',
         'weakness', 'Polyphagia', 'Genital thrush', 'visual blurring',
         'Itching', 'Irritability', 'delayed healing', 'partial paresis',
         'muscle stiffness', 'Alopecia', 'Obesity'
