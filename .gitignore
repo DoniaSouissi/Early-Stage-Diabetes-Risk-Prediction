@@ -1,0 +1,32 @@
+# --- Python Basics ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# --- Virtual Environments (If you use them) ---
+myvenv/
+
+
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
+
+# --- Optional: Large Data ---
+# Uncomment lines below if you don't want to upload data to GitHub
+# data/
+# models/*.joblib
+
+# Ignore Virtual Environments
+myenv/
+venv/
+env/
+.env
+.venv/
+
+# Ignore pycache
+__pycache__/
+*.pyc
