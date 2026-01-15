@@ -8,17 +8,26 @@ We discovered that **Polyuria (Excess Urination)** and **Polydipsia (Excess Thir
 
 ---
 
-## 📊 Project Results
+## 📊 Project Results: Model Comparison
 
-We tested multiple models to compare performance, prioritizing **Recall** (Sensitivity) to minimize False Negatives.
+We evaluated four different architectures using a 60/20/20 split. To ensure the model generalizes well to new patients, we monitored the gap between **Training Accuracy** and **Validation Accuracy**.
 
-| Model | Accuracy | Recall (Sensitivity) | Insight |
-| :--- | :--- | :--- | :--- |
-| **Logistic Regression** | 91.35% | 89.10% | Good baseline, but missed non-linear patterns. |
-| **SVM** | 89.42% | 88.50% | Struggled with the categorical nature of the data. |
-| **Random Forest (Champion)** | **97.12%** | **96.88%** | **Near-perfect detection of positive cases.** |
+| Model | Train Acc. | Val Acc. | Val Recall | Insight |
+| :--- | :--- | :--- | :--- | :--- |
+| **Logistic Regression** | 89.1% | 85.6% | 84.4% | Reliable baseline, but struggles with non-linear symptom patterns. |
+| **SVM** | 88.8% | 84.6% | 84.4% | Lowest performance; hyperspace margins didn't fit categorical data well. |
+| **KNN** | 93.9% | 91.3% | 90.6% | **High performance**; confirms that Age-scaling via StandardScaler was effective. |
+| **Random Forest (🏆)** | **99.7%** | **98.1%** | **96.9%** | **Champion Model:** Near-perfect recall with a very low generalization gap. |
 
 ---
+
+## 🛡️ Robustness & Overfitting Check
+
+A key part of our pipeline was ensuring the model didn't just "memorize" the training data:
+
+1.  **Generalization Gap:** The difference between Random Forest's Training (99.7%) and Validation (98.1%) accuracy is less than 2%. This indicates a highly stable model.
+2.  **Recall Priority:** In medical screening, a **False Negative** (missing a sick patient) is more dangerous than a **False Positive**. We selected Random Forest because it achieved the highest **Recall (96.9%)**.
+3.  **Data Leakage Prevention:** We utilized a strict pipeline where the `StandardScaler` was fit only on training data, ensuring no information from the test set influenced the training process.
 
 ## 🔍 The "Gender Bias" & Super-Features
 
@@ -83,4 +92,3 @@ To replicate this analysis or run the web application:
 ├── app.py                          # Streamlit Web Application
 ├── requirements.txt                # Python Dependencies
 └── README.md                       # Project Documentation
-
