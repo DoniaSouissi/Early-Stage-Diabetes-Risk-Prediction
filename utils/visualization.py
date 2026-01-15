@@ -34,16 +34,78 @@ def plot_distribution(df: pd.DataFrame, column: str, title: str = None):
     plt.tight_layout()
     plt.show()
 
+
+def plot_outlier_check(df: pd.DataFrame, column: str):
+    """
+    Displays a Box Plot to visually detect outliers in numerical data.
+    """
+    plt.figure(figsize=(10, 4))
+    sns.boxplot(x=df[column], color='lightgreen')
+    plt.title(f'Box Plot of {column} (Outlier Detection)')
+    plt.tight_layout()
+    plt.show()
+
+def plot_numerical_vs_target(df: pd.DataFrame, col: str, target: str):
+    """
+    Plots a boxplot comparing a numerical feature against the target classes.
+    """
+    plt.figure(figsize=(8, 5))
+    sns.boxplot(x=target, y=col, data=df, palette='Set2', hue=target, legend=False)
+    plt.title(f'{col} vs {target}')
+    plt.tight_layout()
+    plt.show()
+
+def plot_categorical_grid(df: pd.DataFrame, target: str, exclude_cols: list = None):
+    """
+    Plots a grid of countplots for all categorical features against the target.
+    """
+    if exclude_cols is None:
+        exclude_cols = []
+        
+    # Select categorical columns, excluding target and specified exclusions
+    cat_cols = [col for col in df.columns if col not in exclude_cols and col != target]
+    
+    # Calculate grid dimensions dynamically (or fixed 4x4 as per original)
+    n_cols = 4
+    n_rows = (len(cat_cols) - 1) // n_cols + 1
+    
+    plt.figure(figsize=(20, 5 * n_rows))
+    
+    for i, col in enumerate(cat_cols, 1):
+        plt.subplot(n_rows, n_cols, i)
+        sns.countplot(x=col, hue=target, data=df, palette='coolwarm')
+        plt.title(f'{col} vs {target}')
+        plt.legend(title='Diabetes Risk', loc='upper right', fontsize='small')
+    
+    plt.tight_layout()
+    plt.show()
+
 def plot_correlation_heatmap(df: pd.DataFrame):
-    """Plots a correlation heatmap for the entire dataframe."""
-    plt.figure(figsize=(16, 12))
-    corr = df.corr()
-    mask = np.triu(np.ones_like(corr, dtype=bool)) # Mask the upper triangle
+    """
+    Plots a correlation heatmap with annotations and a Red-Blue color scheme.
+    """
+    plt.figure(figsize=(14, 10))
     
-    sns.heatmap(corr, mask=mask, annot=False, fmt=".2f", cmap='coolwarm', 
-                linewidths=0.5, cbar_kws={"shrink": .8})
+    # Calculate correlation
+    # We select only numerical columns to avoid errors if strings are present
+    corr = df.select_dtypes(include=[np.number]).corr()
     
-    plt.title('Feature Correlation Matrix', fontsize=16)
+    # Create a mask to hide the upper triangle (optional, but cleaner)
+    # If you want a full square like your original, you can remove the 'mask' argument below
+    mask = np.triu(np.ones_like(corr, dtype=bool))
+    
+    sns.heatmap(
+        corr, 
+        mask=None,          
+        annot=True,         # Show numbers <--- Added this
+        fmt=".2f",          # 2 decimal places
+        cmap='RdBu_r',      # Red-Blue Reversed Color map <--- Added this
+        vmin=-1, vmax=1,    # Fixed scale from -1 to 1 <--- Added this
+        linewidths=0.5, 
+        cbar_kws={"shrink": .8}
+    )
+    
+    plt.title('Correlation Heatmap (Feature vs Feature)', fontsize=16)
     plt.tight_layout()
     plt.show()
 
@@ -76,3 +138,4 @@ def plot_categorical_vs_target(df: pd.DataFrame, col: str, target: str):
     plt.legend(title=target, loc='upper right')
     plt.tight_layout()
     plt.show()
+
