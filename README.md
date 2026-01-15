@@ -17,7 +17,7 @@ We evaluated four different architectures using a 60/20/20 split. To ensure the 
 | **Logistic Regression** | 89.1% | 85.6% | 84.4% | Reliable baseline, but struggles with non-linear symptom patterns. |
 | **SVM** | 88.8% | 84.6% | 84.4% | Lowest performance; hyperspace margins didn't fit categorical data well. |
 | **KNN** | 93.9% | 91.3% | 90.6% | **High performance**; confirms that Age-scaling via StandardScaler was effective. |
-| **Random Forest (🏆)** | **99.7%** | **98.1%** | **96.9%** | **Champion Model:** Near-perfect recall with a very low generalization gap. |
+| **Random Forest** | **99.7%** | **98.1%** | **96.9%** | **Champion Model:** Near-perfect recall with a very low generalization gap. |
 
 ---
 
@@ -48,7 +48,7 @@ To replicate this analysis or run the web application:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction](https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction)
+    git clone https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction
     cd diabetes-risk-prediction
     ```
 
