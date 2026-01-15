@@ -474,7 +474,7 @@ if model is None:
 
 # Futuristic Header
 st.markdown("<h1 class='main-header'><span class='emoji-float'>🔬</span> DiabRisk AI Pro <span class='emoji-float'>🧬</span></h1>", unsafe_allow_html=True)
-st.markdown("<p class='sub-text'>🚀 Futuristic AI for Early Diabetes Detection – Powered by Neural Insights</p>", unsafe_allow_html=True)
+st.markdown("<p class='sub-text'>🚀 Futuristic AI for Early Diabetes Detection </p>", unsafe_allow_html=True)
 
 # Main Form with Enhanced Layout
 with st.form("prediction_form"):
@@ -486,38 +486,38 @@ with st.form("prediction_form"):
     st.markdown("---")
     
     # Section 2: Clinical Symptoms
-    st.markdown("### 📋 Symptoms Checklist")
+    st.markdown("### 🔬 Clinical Symptoms Assessment")
 
     # Enhanced 3-Column Layout with Icons
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.markdown("**💧 Hydration Metrics**")
-        polyuria = st.selectbox("Polyuria 💦", ["No", "Yes"], help="Excessive urination detected?")
-        polydipsia = st.selectbox("Polydipsia 🥤", ["No", "Yes"], help="Unquenchable thirst levels")
-        polyphagia = st.selectbox("Polyphagia 🍽️", ["No", "Yes"], help="Abnormal hunger spikes")
-        weight_loss = st.selectbox("Weight Loss ⚖️", ["No", "Yes"], help="Sudden mass reduction")
-        obesity = st.selectbox("Obesity 📏", ["No", "Yes"], help="BMI overload >30")
+        st.markdown("**💧 Hydration & Metabolic Symptoms**")
+        polyuria = st.selectbox("Polyuria 💦", ["No", "Yes"], help="Frequent or excessive urination")
+        polydipsia = st.selectbox("Polydipsia 🥤", ["No", "Yes"], help="Unusually increased thirst")
+        polyphagia = st.selectbox("Polyphagia 🍽️", ["No", "Yes"], help="Unusually increased hunger")
+        weight_loss = st.selectbox("Sudden Weight Loss 📉", ["No", "Yes"], help="Unexplained or rapid weight loss")
+        obesity = st.selectbox("Obesity 📏", ["No", "Yes"], help="Doctor-diagnosed obesity or high body fat")
 
     with c2:
-        st.markdown("**🧠 Neural System Check**")
-        weakness = st.selectbox("Weakness 😴", ["No", "Yes"], help="Energy depletion")
-        visual_blurring = st.selectbox("Visual Blurring 👀", ["No", "Yes"], help="Optical distortion")
-        irritability = st.selectbox("Irritability 😠", ["No", "Yes"], help="Emotional volatility")
-        partial_paresis = st.selectbox("Partial Paresis 💪", ["No", "Yes"], help="Muscle power loss")
-        muscle_stiffness = st.selectbox("Muscle Stiffness 🏋️", ["No", "Yes"], help="Rigidity in motion")
+        st.markdown("**🧠 Neurological & Vision Symptoms**")
+        weakness = st.selectbox("Weakness 😴", ["No", "Yes"], help="General feeling of tiredness or low strength")
+        visual_blurring = st.selectbox("Visual Blurring 👀", ["No", "Yes"], help="Blurred or unclear vision")
+        irritability = st.selectbox("Irritability 😠", ["No", "Yes"], help="Unusual mood changes")
+        partial_paresis = st.selectbox("Partial Paresis 💪", ["No", "Yes"], help="Partial loss of muscle strength or control")
+        muscle_stiffness = st.selectbox("Muscle Stiffness 🏋️", ["No", "Yes"], help="Stiff or difficult movement of muscles")
 
     with c3:
-        st.markdown("**🩹 Bio-Surface Scan**")
-        genital_thrush = st.selectbox("Genital Thrush 🦠", ["No", "Yes"], help="Infection alert")
-        itching = st.selectbox("Itching 🐜", ["No", "Yes"], help="Surface irritation")
-        delayed_healing = st.selectbox("Delayed Healing ⏳", ["No", "Yes"], help="Recovery slowdown")
-        alopecia = st.selectbox("Alopecia 💇", ["No", "Yes"], help="Hair loss")
+        st.markdown("**🩹 Skin & Infection-Related Symptoms**")
+        genital_thrush = st.selectbox("Genital Thrush 🦠", ["No", "Yes"], help="Recurrent fungal infection in genital area")
+        itching = st.selectbox("Itching 🌡️", ["No", "Yes"], help="Persistent skin itching")
+        delayed_healing = st.selectbox("Delayed Healing ⏳", ["No", "Yes"], help="Cuts or wounds heal slowly")
+        alopecia = st.selectbox("Alopecia 💇", ["No", "Yes"], help="Hair loss or thinning")
 
     st.markdown("<br>", unsafe_allow_html=True)
     
     # Submit Button
-    submit_btn = st.form_submit_button("🔍 Analyze Risk Now")
+    submit_btn = st.form_submit_button("🧬 Analyzing patient data...")
 
 # ------------------------------------------------------------------------------------------------
 # 4. PREDICTION LOGIC
@@ -550,7 +550,7 @@ if submit_btn:
             probability = model.predict_proba(processed_data)[0][1]
 
             # Display Results
-            st.markdown("### 📊 Assessment Result")
+            st.markdown("### 📊 AI Assessment Results")
             
             if prediction == 1:
                 # High Risk Result
@@ -587,10 +587,23 @@ if submit_btn:
                             • Schedule routine system diagnostics<br>
                             • Enhance hydration and vitality subroutines
                         </p>
-                        
+                        <p style='margin-top: 1.2rem; font-size: 1rem; opacity: 0.9;'>
+                            📡 This is a pre-scan utility. Interface with health experts for full spectrum analysis.
+                        </p>
                     </div>
                 """, unsafe_allow_html=True)
                 
         except Exception as e:
             st.error(f"❌ Neural Error: {str(e)}")
             st.info("🔧 Debug Tip: Verify preprocessor and model integrity.")
+
+# Medical Disclaimer
+st.markdown("""
+    <div class='disclaimer-box'>
+        <p>
+            ⚕️ <strong>Protocol Disclaimer:</strong> This neural AI is for simulation and pre-scan only. 
+            It does not override medical expert systems. Always engage certified health interfaces 
+            for diagnostic and therapeutic operations.
+        </p>
+    </div>
+""", unsafe_allow_html=True)

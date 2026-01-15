@@ -2,6 +2,23 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
+from IPython.display import display
+
+def check_duplicates(df: pd.DataFrame):
+    """
+    Checks for duplicate rows. 
+    If found, prints the count and displays the first 5 examples.
+    """
+    duplicates = df.duplicated().sum()
+    print(f"Number of duplicate rows: {duplicates}")
+
+    if duplicates > 0:
+        print("Duplicate rows found. Displaying first 5:")
+        display(df[df.duplicated()].head())
+    else:
+        print(" No duplicate rows found.")
+
+
 
 def setup_styles():
     """Configures the global style for all plots."""
@@ -90,17 +107,14 @@ def plot_correlation_heatmap(df: pd.DataFrame):
     # We select only numerical columns to avoid errors if strings are present
     corr = df.select_dtypes(include=[np.number]).corr()
     
-    # Create a mask to hide the upper triangle (optional, but cleaner)
-    # If you want a full square like your original, you can remove the 'mask' argument below
-    mask = np.triu(np.ones_like(corr, dtype=bool))
     
     sns.heatmap(
         corr, 
         mask=None,          
-        annot=True,         # Show numbers <--- Added this
+        annot=True,         # Show numbers 
         fmt=".2f",          # 2 decimal places
-        cmap='RdBu_r',      # Red-Blue Reversed Color map <--- Added this
-        vmin=-1, vmax=1,    # Fixed scale from -1 to 1 <--- Added this
+        cmap='RdBu_r',      # Red-Blue Reversed Color map 
+        vmin=-1, vmax=1,    # Fixed scale from -1 to 1 
         linewidths=0.5, 
         cbar_kws={"shrink": .8}
     )

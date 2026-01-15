@@ -6,13 +6,20 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
 from sklearn.compose import ColumnTransformer
 
-def load_data(filepath):
+
+def clean_duplicates(df: pd.DataFrame):
     """
-    Loads the dataset from a CSV file.
+    Drops duplicate rows from the DataFrame and returns the clean version.
+    Prints the number of rows removed.
     """
-    if not os.path.exists(filepath):
-        raise FileNotFoundError(f"The file {filepath} was not found.")
-    return pd.read_csv(filepath)
+    initial_count = len(df)
+    df_clean = df.drop_duplicates()
+    final_count = len(df_clean)
+    
+    print(f" Dropped {initial_count - final_count} duplicate rows.")
+    print(f"New Data Shape: {df_clean.shape}")
+    
+    return df_clean
 
 def detect_outliers_iqr(df, column):
     """
@@ -34,6 +41,8 @@ def detect_outliers_iqr(df, column):
     num_outliers = len(outliers)
     
     return lower_bound, upper_bound, num_outliers
+
+
 
 def split_data(df, target_column='class', test_size=0.2, val_size=0.2, random_state=42):
     """
