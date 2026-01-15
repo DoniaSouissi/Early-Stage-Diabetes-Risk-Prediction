@@ -37,7 +37,7 @@ A critical step in our pipeline was the decision to **remove duplicate rows** fo
 During our analysis, we uncovered two critical patterns that influenced our preprocessing:
 
 1.  **The "Super-Features":**
-    * Patients presenting with both **Polyuria** and **Polydipsia** had an overwhelmingly high probability (>90%) of testing positive.
+    * Patients presenting with both **Polyuria** and **Polydipsia** had an overwhelmingly high probability of testing positive.
 
 2.  **Gender Bias Removal:**
     * **Observation:** The raw data showed a strong correlation where Female patients were disproportionately diabetic compared to Males, likely due to sampling bias in the hospital data.
