@@ -138,6 +138,45 @@ def plot_target_correlations(df: pd.DataFrame, target: str, k: int = 10):
     plt.tight_layout()
     plt.show()
 
+def check_correlations(df: pd.DataFrame, threshold: float = 0.5):
+    """
+    Calculates and prints the strongest correlations between features.
+    automatically handles 'Yes'/'No' encoding for calculation.
+    """
+    print(" CALCULATING FEATURE CORRELATIONS...")
+    
+    # 1. Create a copy to avoid modifying the original data
+    df_temp = df.copy()
+    
+    # 2. Temporary Binary Encoding for calculation
+    # Maps Yes/Positive/Male -> 1, others -> 0
+    for col in df_temp.columns:
+        if df_temp[col].dtype == 'object':
+            df_temp[col] = df_temp[col].apply(lambda x: 1 if x in ['Yes', 'Positive', 'Male'] else 0)
+            
+    # 3. Calculate Correlation Matrix
+    corr_matrix = df_temp.corr().abs()
+    
+    # 4. Unstack and filter to get unique pairs (remove self-correlation)
+    upper_tri = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
+    high_corr = upper_tri.stack().sort_values(ascending=False)
+    
+    # 5. Filter by threshold and print
+    top_correlations = high_corr[high_corr > threshold]
+    
+    print(f"\n Top Correlations (> {threshold}):")
+    print("-" * 40)
+    print(top_correlations)
+    
+    print("\n GUIDE:")
+    print("• > 0.90: Redundant features (Drop one).")
+    print("• > 0.60: Strong predictors or interaction effects (Keep both).")
+    
+    return top_correlations
+
+
+
+#----This is an extra function to visualize categorical vs target relationship----#
 def plot_categorical_vs_target(df: pd.DataFrame, col: str, target: str):
     """
     Plots a normalized stacked bar chart to show the relationship 
@@ -152,4 +191,3 @@ def plot_categorical_vs_target(df: pd.DataFrame, col: str, target: str):
     plt.legend(title=target, loc='upper right')
     plt.tight_layout()
     plt.show()
-
