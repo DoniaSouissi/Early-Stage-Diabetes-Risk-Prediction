@@ -28,16 +28,22 @@ def setup_styles():
 
 def plot_distribution(df: pd.DataFrame, column: str, title: str = None):
     """
+    Automatically detects data type and plots the appropriate distribution:
+
     Plots the distribution of a single variable.
     - Histogram with KDE for numerical data.
     - Countplot for categorical data.
     """
+    # Initialize the figure size (Width: 8 inches, Height: 5 inches)
     plt.figure(figsize=(8, 5))
     
     # Check if column is effectively categorical (few unique values)
+    # If a column has fewer than 10 unique options (like "Yes"/"No"), we treat it as Categorical.
     if df[column].nunique() < 10:
+        
         ax = sns.countplot(x=column, data=df, palette='viridis')
-        # Add counts on top of bars
+
+        # We iterate through every bar (patch) in the graph
         for p in ax.patches:
             ax.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., p.get_height()),
                         ha='center', va='baseline', fontsize=10, color='black', xytext=(0, 5),
