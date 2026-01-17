@@ -57,13 +57,25 @@ During our analysis, we uncovered two critical patterns that influenced our prep
 
 ---
 
+## 💻 DiabRisk AI Pro: The Interface
+
+To make the model accessible, we developed **DiabRisk AI Pro**, a fully interactive web application powered by **Streamlit**. Unlike standard data forms, this interface is designed with a **Futuristic Medical Theme** to engage users.
+
+**Key Interface Features:**
+* **🧠 Dynamic UX:** Features a "Neural Network" animated background with glassmorphism effects and floating medical particles.
+* **⚡ Smart Grouping:** Instead of a long list, symptoms are logically grouped into **Metabolic**, **Neurological**, and **Dermatological** columns for easier data entry.
+* **🚫 Bias-Free Design:** The interface strictly implements our research findings by **excluding Gender** from the input fields.
+* **📊 Real-Time Feedback:** Provides instant **"Critical Risk"** (Red) or **"System Stable"** (Green) alerts with precise probability percentages.
+
+---
+
 ## 🛠️ Installation & Usage
 
 To replicate this analysis or run the web application:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction
+    git clone [https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction](https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction)
     cd diabetes-risk-prediction
     ```
 
