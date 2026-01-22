@@ -75,7 +75,7 @@ To replicate this analysis or run the web application:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction](https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction)
+    git clone https://github.com/DoniaSouissi/Early-Stage-Diabetes-Risk-Prediction
     cd diabetes-risk-prediction
     ```
 
